@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.38">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Your Name Here">
-<title>COMP/STAT212 Portfolio</title>
+<title>HW1 - Tidy Tuesday Viz – COMP/STAT212 Portfolio</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,7 +63,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pvj/pvj-01.html" rel="next">
+<link href="./pcl/pcl.html" rel="next">
+<link href="./tt/2025-07-15.html" rel="prev">
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -122,9 +122,7 @@ cookieconsent.run({
   });
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
-<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script><script src="site_libs/wordcloud2-0.0.1/hover.js"></script><script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script><link rel="stylesheet" href="style/custom.css">
+<link rel="stylesheet" href="style/custom.css">
 </head>
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -295,7 +293,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-title">Welcome</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tt/2025-07-08.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="./tt_9_16.html"><span class="chapter-title">HW1 - Tidy Tuesday Viz</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -328,7 +326,7 @@ cookieconsent.run({
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Welcome</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -368,7 +366,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tt_9_16.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">HW1 - Tidy Tuesday Viz</span></a>
+  <a href="./tt_9_16.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">HW1 - Tidy Tuesday Viz</span></a>
   </div>
 </li>
       </ul>
@@ -435,50 +433,207 @@ cookieconsent.run({
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link active" data-scroll-target="#getting-the-data">Getting the Data</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  <li><a href="#data-viz" id="toc-data-viz" class="nav-link" data-scroll-target="#data-viz">Data Viz</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">COMP/STAT212 Portfolio</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tt/2025-07-08.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="./tt_9_16.html"><span class="chapter-title">HW1 - Tidy Tuesday Viz</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">HW1 - Tidy Tuesday Viz</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Your Name Here </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Wednesday, September 16, 2026</p>
-    </div>
-  </div>
   
     
   </div>
   
 
 
-</header><p>Welcome to my online portfolio for COMP/STAT112 course taken at <a href="https://www.macalester.edu/">Macalester College</a>. Please, use the side bar on the left for navigation.</p>
+</header><section id="getting-the-data" class="level2"><h2 class="anchored" data-anchor-id="getting-the-data">Getting the Data</h2>
 <div class="cell">
-<div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-a41c10387827ea0ee23d" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-a41c10387827ea0ee23d">{"x":{"word":["welcome","to","comp","stat","212","mac","st paul"],"freq":[10,2,8,8,8,6,6],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":18,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"cardioid","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>cafe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cafe.csv'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>cappuccino_index <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cappuccino_index.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section><section id="exploring-the-data" class="level2"><h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># A breif overview of the data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">head</span>(cafe)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  country city  urban suburban rural hourly_wage_gbp price_gbp original_currency
+  &lt;chr&gt;   &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt;    &lt;lgl&gt;           &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;            
+1 Denmark Cope… TRUE  FALSE    FALSE           16.0      10.3  DKK - Danish Kro…
+2 China   Shen… TRUE  FALSE    FALSE            3.29      9.44 CNY - Yuan Renmi…
+3 USA     West… FALSE TRUE     FALSE           13.2       8.89 USD - US dollar  
+4 Switze… St. … FALSE FALSE    TRUE            24.5       8.26 CHF - Swiss Franc
+5 Denmark Cope… TRUE  FALSE    FALSE           16.0       7.45 DKK - Danish Kro…
+6 Singap… Sing… TRUE  FALSE    FALSE           11.2       6.89 SGD - Singapore …
+# ℹ 2 more variables: price &lt;dbl&gt;, hourly_wage &lt;dbl&gt;</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">head</span>(cappuccino_index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  country     index     n minutes seconds index_as_time
+  &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;        
+1 Australia    10.1   171      10       4 10:04        
+2 Italy        11.9    15      11      51 11:51        
+3 New&nbsp;Zealand  12.7    35      12      44 12:44        
+4 Switzerland  14.4    18      14      24 14:24        
+5 Netherlands  14.9    73      14      51 14:51        
+6 Puerto Rico  14.9     1      14      53 14:53        </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">str</span>(cafe)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [2,594 × 10] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ country          : chr [1:2594] "Denmark" "China" "USA" "Switzerland" ...
+ $ city             : chr [1:2594] "Copenhagen" "Shenzhen" "West Richland" "St. Moritz" ...
+ $ urban            : logi [1:2594] TRUE TRUE FALSE FALSE TRUE TRUE ...
+ $ suburban         : logi [1:2594] FALSE FALSE TRUE FALSE FALSE FALSE ...
+ $ rural            : logi [1:2594] FALSE FALSE FALSE TRUE FALSE FALSE ...
+ $ hourly_wage_gbp  : num [1:2594] 16.04 3.29 13.25 24.5 16.04 ...
+ $ price_gbp        : num [1:2594] 10.31 9.44 8.89 8.26 7.45 ...
+ $ original_currency: chr [1:2594] "DKK - Danish Krone" "CNY - Yuan Renminbi" "USD - US dollar" "CHF - Swiss Franc" ...
+ $ price            : num [1:2594] 90 86 12 9 65 11.9 8 6.8 32 55 ...
+ $ hourly_wage      : num [1:2594] 140 30 17.9 26.7 140 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   country = col_character(),
+  ..   city = col_character(),
+  ..   urban = col_logical(),
+  ..   suburban = col_logical(),
+  ..   rural = col_logical(),
+  ..   hourly_wage_gbp = col_double(),
+  ..   price_gbp = col_double(),
+  ..   original_currency = col_character(),
+  ..   price = col_double(),
+  ..   hourly_wage = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">str</span>(cappuccino_index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [87 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ country      : chr [1:87] "Australia" "Italy" "New&nbsp;Zealand" "Switzerland" ...
+ $ index        : num [1:87] 10.1 11.9 12.7 14.4 14.9 ...
+ $ n            : num [1:87] 171 15 35 18 73 1 4 167 22 19 ...
+ $ minutes      : num [1:87] 10 11 12 14 14 14 14 14 15 15 ...
+ $ seconds      : num [1:87] 4 51 44 24 51 53 56 58 29 45 ...
+ $ index_as_time: chr [1:87] "10:04" "11:51" "12:44" "14:24" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   country = col_character(),
+  ..   index = col_double(),
+  ..   n = col_double(),
+  ..   minutes = col_double(),
+  ..   seconds = col_double(),
+  ..   index_as_time = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
 </div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#A look at variables of interest</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarize</span>(<span class="at">min_price=</span><span class="fu">min</span>(price_gbp),<span class="at">max_price=</span><span class="fu">max</span>(price_gbp),<span class="at">mean_price=</span><span class="fu">mean</span>(price_gbp),<span class="at">median_price=</span> <span class="fu">median</span>(price_gbp), <span class="at">min_wage =</span> <span class="fu">min</span>(hourly_wage_gbp), <span class="at">max_wage =</span> <span class="fu">max</span>(hourly_wage_gbp),<span class="at">mean_wage =</span> <span class="fu">mean</span>(hourly_wage_gbp),<span class="at">meadian_wage =</span> <span class="fu">median</span>(hourly_wage_gbp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 8
+  min_price max_price mean_price median_price min_wage max_wage mean_wage
+      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1      0.83      10.3       3.38         3.43     0.17     42.8      11.3
+# ℹ 1 more variable: meadian_wage &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Interesting, they’re is a lot of varitability in the range of both Cappuccino price and Cafe worker wage. I’m corous if the wages or Cappuccino price changes if the cafe is in a rural, suburaban, or urban area.</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># We have to first make a var that shows if the cafe is rural, suburban, urban</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>cafe <span class="ot">&lt;-</span> cafe <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    urban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Urban"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    suburban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Suburban"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    rural <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Rural"</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>Now we have a location variable to use for plots.</p>
+</blockquote>
+</section><section id="data-viz" class="level2"><h2 class="anchored" data-anchor-id="data-viz">Data Viz</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Genral vizualization to look at the relationship of location and price_gbd and hourly_wage_gbp</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>price_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="tt_9_16_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="tt_9_16_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>It seems as though the means of both hourly wage and price of a cappuccino aren’t affected by location, but some of the extremes are are more isolated to certain regions.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Is there a difference in the relationship between hourly wage and the price of a cappuccino in different locations?</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">y=</span>price_gbp))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> location, <span class="at">shape =</span> location), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="at">title =</span> <span class="st">"Hourly Wage and Cappuccino Price"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="at">subtitle =</span> <span class="st">"Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations."</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>    <span class="at">x =</span> <span class="st">"Hourly Wage (GBD)"</span>, <span class="at">y =</span> <span class="st">"Price of Cappuccino (GBD)"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    <span class="at">color =</span> <span class="st">"Urban"</span>, <span class="at">shape =</span> <span class="st">"Urban"</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  )<span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>location)<span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>  <span class="fu">scale_color_colorblind</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="tt_9_16_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship.</p>
+</blockquote>
+</section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<blockquote class="blockquote">
+<p>It seems that the mean and distabution of both hourly wage and the price of a cappuccino aren’t efffected by location, but the relationship between the varriables is effected by location.</p>
+</blockquote>
 
 
 <!-- -->
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -946,55 +1101,103 @@ cookieconsent.run({
       }
     }
   });
-  </script><nav class="page-navigation column-page-right"><div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="./tt/2025-07-15.html" class="pagination-link" aria-label="TidyTuesday Sample 2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">TidyTuesday Sample 2</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pvj/pvj-01.html" class="pagination-link" aria-label="Personal Visualization Journey">
-        <span class="nav-page-text"><span class="chapter-title">Personal Visualization Journey</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./pcl/pcl.html" class="pagination-link" aria-label="Pre-Class Learning Summaries">
+        <span class="nav-page-text"><span class="chapter-title">Pre-Class Learning Summaries</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Welcome"</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>Welcome to my online portfolio for COMP/STAT112 course taken at <span class="co">[</span><span class="ot">Macalester College</span><span class="co">](https://www.macalester.edu/)</span>.  Please, use the side bar on the left for navigation.</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="in">```{r}</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#| output: false</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"wordcloud2"</span>, <span class="st">"here"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="in">```</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="in">```{r}</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#| output: false</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="fu">install.packages</span>(<span class="fu">setdiff</span>(packages, <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())), <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="in">```</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="in">```{r}</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#| output: false</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="co">#| message: false</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a></span>
-<span id="cb1-33"><a href="#cb1-33"></a><span class="fu">lapply</span>(packages, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="in">```</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a></span>
-<span id="cb1-38"><a href="#cb1-38"></a><span class="in">```{r}</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a><span class="co">#| output: false</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-41"><a href="#cb1-41"></a></span>
-<span id="cb1-42"><a href="#cb1-42"></a>ds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"assets"</span>, <span class="st">"msg.csv"</span>))</span>
-<span id="cb1-43"><a href="#cb1-43"></a><span class="in">```</span></span>
-<span id="cb1-44"><a href="#cb1-44"></a></span>
-<span id="cb1-47"><a href="#cb1-47"></a><span class="in">```{r}</span></span>
-<span id="cb1-48"><a href="#cb1-48"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-49"><a href="#cb1-49"></a></span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="fu">wordcloud2</span>(<span class="at">data =</span> ds, <span class="at">shape =</span> <span class="st">"cardioid"</span>)</span>
-<span id="cb1-51"><a href="#cb1-51"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="an">title:</span><span class="co"> "HW1 - Tidy Tuesday Viz"</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">---</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">## Getting the Data</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="in">```{r}</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb16-13"><a href="#cb16-13"></a>cafe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cafe.csv'</span>)</span>
+<span id="cb16-14"><a href="#cb16-14"></a>cappuccino_index <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cappuccino_index.csv'</span>)</span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="in">```</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a></span>
+<span id="cb16-17"><a href="#cb16-17"></a></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="fu">## Exploring the Data</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="in">```{r}</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="co"># A breif overview of the data</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="fu">head</span>(cafe)</span>
+<span id="cb16-25"><a href="#cb16-25"></a><span class="fu">head</span>(cappuccino_index)</span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="fu">str</span>(cafe)</span>
+<span id="cb16-27"><a href="#cb16-27"></a><span class="fu">str</span>(cappuccino_index)</span>
+<span id="cb16-28"><a href="#cb16-28"></a><span class="in">```</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a></span>
+<span id="cb16-32"><a href="#cb16-32"></a><span class="in">```{r}</span></span>
+<span id="cb16-33"><a href="#cb16-33"></a><span class="co">#A look at variables of interest</span></span>
+<span id="cb16-34"><a href="#cb16-34"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb16-35"><a href="#cb16-35"></a>  <span class="fu">summarize</span>(<span class="at">min_price=</span><span class="fu">min</span>(price_gbp),<span class="at">max_price=</span><span class="fu">max</span>(price_gbp),<span class="at">mean_price=</span><span class="fu">mean</span>(price_gbp),<span class="at">median_price=</span> <span class="fu">median</span>(price_gbp), <span class="at">min_wage =</span> <span class="fu">min</span>(hourly_wage_gbp), <span class="at">max_wage =</span> <span class="fu">max</span>(hourly_wage_gbp),<span class="at">mean_wage =</span> <span class="fu">mean</span>(hourly_wage_gbp),<span class="at">meadian_wage =</span> <span class="fu">median</span>(hourly_wage_gbp))</span>
+<span id="cb16-36"><a href="#cb16-36"></a><span class="in">```</span></span>
+<span id="cb16-37"><a href="#cb16-37"></a></span>
+<span id="cb16-38"><a href="#cb16-38"></a></span>
+<span id="cb16-39"><a href="#cb16-39"></a><span class="at">&gt; Interesting, they're is a lot of varitability in the range of both Cappuccino price and Cafe worker wage. I'm corous if the wages or Cappuccino price changes if the cafe is in a rural, suburaban, or urban area.</span></span>
+<span id="cb16-40"><a href="#cb16-40"></a></span>
+<span id="cb16-43"><a href="#cb16-43"></a><span class="in">```{r}</span></span>
+<span id="cb16-44"><a href="#cb16-44"></a><span class="co"># We have to first make a var that shows if the cafe is rural, suburban, urban</span></span>
+<span id="cb16-45"><a href="#cb16-45"></a></span>
+<span id="cb16-46"><a href="#cb16-46"></a>cafe <span class="ot">&lt;-</span> cafe <span class="sc">|&gt;</span></span>
+<span id="cb16-47"><a href="#cb16-47"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-48"><a href="#cb16-48"></a>    urban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Urban"</span>,</span>
+<span id="cb16-49"><a href="#cb16-49"></a>    suburban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Suburban"</span>,</span>
+<span id="cb16-50"><a href="#cb16-50"></a>    rural <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Rural"</span></span>
+<span id="cb16-51"><a href="#cb16-51"></a>  ))</span>
+<span id="cb16-52"><a href="#cb16-52"></a><span class="in">```</span></span>
+<span id="cb16-53"><a href="#cb16-53"></a></span>
+<span id="cb16-54"><a href="#cb16-54"></a><span class="at">&gt; Now we have a location variable to use for plots.</span></span>
+<span id="cb16-55"><a href="#cb16-55"></a></span>
+<span id="cb16-56"><a href="#cb16-56"></a></span>
+<span id="cb16-57"><a href="#cb16-57"></a><span class="fu">## Data Viz</span></span>
+<span id="cb16-58"><a href="#cb16-58"></a></span>
+<span id="cb16-61"><a href="#cb16-61"></a><span class="in">```{r}</span></span>
+<span id="cb16-62"><a href="#cb16-62"></a><span class="co"># Genral vizualization to look at the relationship of location and price_gbd and hourly_wage_gbp</span></span>
+<span id="cb16-63"><a href="#cb16-63"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb16-64"><a href="#cb16-64"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb16-65"><a href="#cb16-65"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>price_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb16-66"><a href="#cb16-66"></a></span>
+<span id="cb16-67"><a href="#cb16-67"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb16-68"><a href="#cb16-68"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb16-69"><a href="#cb16-69"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb16-70"><a href="#cb16-70"></a><span class="in">```</span></span>
+<span id="cb16-71"><a href="#cb16-71"></a></span>
+<span id="cb16-72"><a href="#cb16-72"></a><span class="at">&gt; It seems as though the means of both hourly wage and price of a cappuccino aren't affected by location, but some of the extremes are are more isolated to certain regions. </span></span>
+<span id="cb16-73"><a href="#cb16-73"></a></span>
+<span id="cb16-74"><a href="#cb16-74"></a><span class="at">&gt; Is there a difference in the relationship between hourly wage and the price of a cappuccino in different locations?</span></span>
+<span id="cb16-75"><a href="#cb16-75"></a></span>
+<span id="cb16-76"><a href="#cb16-76"></a></span>
+<span id="cb16-77"><a href="#cb16-77"></a></span>
+<span id="cb16-80"><a href="#cb16-80"></a><span class="in">```{r}</span></span>
+<span id="cb16-81"><a href="#cb16-81"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb16-82"><a href="#cb16-82"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">y=</span>price_gbp))<span class="sc">+</span></span>
+<span id="cb16-83"><a href="#cb16-83"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> location, <span class="at">shape =</span> location), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb16-84"><a href="#cb16-84"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb16-85"><a href="#cb16-85"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-86"><a href="#cb16-86"></a>    <span class="at">title =</span> <span class="st">"Hourly Wage and Cappuccino Price"</span>,</span>
+<span id="cb16-87"><a href="#cb16-87"></a>    <span class="at">subtitle =</span> <span class="st">"Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations."</span>,</span>
+<span id="cb16-88"><a href="#cb16-88"></a>    <span class="at">x =</span> <span class="st">"Hourly Wage (GBD)"</span>, <span class="at">y =</span> <span class="st">"Price of Cappuccino (GBD)"</span>,</span>
+<span id="cb16-89"><a href="#cb16-89"></a>    <span class="at">color =</span> <span class="st">"Urban"</span>, <span class="at">shape =</span> <span class="st">"Urban"</span></span>
+<span id="cb16-90"><a href="#cb16-90"></a>  )<span class="sc">+</span></span>
+<span id="cb16-91"><a href="#cb16-91"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>location)<span class="sc">+</span></span>
+<span id="cb16-92"><a href="#cb16-92"></a>  <span class="fu">scale_color_colorblind</span>()</span>
+<span id="cb16-93"><a href="#cb16-93"></a><span class="in">```</span></span>
+<span id="cb16-94"><a href="#cb16-94"></a><span class="at">&gt; The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship. </span></span>
+<span id="cb16-95"><a href="#cb16-95"></a></span>
+<span id="cb16-96"><a href="#cb16-96"></a><span class="fu">## Conclusion</span></span>
+<span id="cb16-97"><a href="#cb16-97"></a></span>
+<span id="cb16-98"><a href="#cb16-98"></a><span class="at">&gt; It seems that the mean and distabution of both hourly wage and the price of a cappuccino aren't efffected by location, but the relationship between the varriables is effected by location.</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
