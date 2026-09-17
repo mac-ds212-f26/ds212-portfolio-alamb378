@@ -1,0 +1,87 @@
+---
+title: "HW1 - Tidy Tuesday Viz"
+---
+
+## Getting the Data
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+library(ggthemes)
+cafe <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cafe.csv')
+cappuccino_index <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cappuccino_index.csv')
+```
+
+
+## Exploring the Data
+
+```{r}
+# A breif overview of the data
+head(cafe)
+head(cappuccino_index)
+str(cafe)
+str(cappuccino_index)
+```
+
+```{r}
+#A look at variables of interest
+cafe |> 
+  summarize(min_price=min(price_gbp),max_price=max(price_gbp),mean_price=mean(price_gbp),median_price= median(price_gbp), min_wage = min(hourly_wage_gbp), max_wage = max(hourly_wage_gbp),mean_wage = mean(hourly_wage_gbp),meadian_wage = median(hourly_wage_gbp))
+```
+
+
+> Interesting, they're is a lot of varitability in the range of both Cappuccino price and Cafe worker wage. I'm corous if the wages or Cappuccino price changes if the cafe is in a rural, suburaban, or urban area.
+
+```{r}
+# We have to first make a var that shows if the cafe is rural, suburban, urban
+
+cafe <- cafe |>
+  mutate(location = case_when(
+    urban == TRUE ~ "Urban",
+    suburban == TRUE ~ "Suburban",
+    rural == TRUE ~ "Rural"
+  ))
+```
+
+> Now we have a location variable to use for plots.
+
+
+## Data Viz
+
+```{r}
+# Genral vizualization to look at the relationship of location and price_gbd and hourly_wage_gbp
+cafe |> 
+  ggplot()+
+  geom_density(aes(x=price_gbp, fill=location), alpha = 0.3)
+
+cafe |> 
+  ggplot()+
+  geom_density(aes(x=hourly_wage_gbp, fill=location), alpha = 0.3)
+```
+
+> It seems as though the means of both hourly wage and price of a cappuccino aren't affected by location, but some of the extremes are are more isolated to certain regions. 
+
+> Is there a difference in the relationship between hourly wage and the price of a cappuccino in different locations?
+
+
+
+```{r}
+
+cafe |> 
+  ggplot(aes(x=hourly_wage_gbp, y=price_gbp))+
+  geom_point(aes(color = location, shape = location), alpha = 0.5)+
+  geom_smooth(method = "lm")+
+  labs(
+    title = "Hourly Wage and Cappuccino Price",
+    subtitle = "Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations.",
+    x = "Hourly Wage (GBD)", y = "Price of Cappuccino (GBD)",
+    color = "Urban", shape = "Urban"
+  )+
+  facet_wrap(~location)+
+  scale_color_colorblind()
+```
+> The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship. 
+
+## Conclusion
+
+> It seems that the mean and distabution of both hourly wage and the price of a cappuccino aren't efffected by location, but the relationship between the varriables is effected by location.
