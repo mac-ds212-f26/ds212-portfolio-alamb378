@@ -79,6 +79,8 @@ cafe |>
   )+
   facet_wrap(~location)+
   scale_color_colorblind()
+
+ggsave("tt_9_16.png")
 ```
 > The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship. 
 
