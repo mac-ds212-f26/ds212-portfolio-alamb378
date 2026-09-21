@@ -241,7 +241,7 @@ Note that
 
 ![SFO Precipitation in 2011](https://hash-mac.github.io/ds212site-f26/images/sfo_third_graph.png)
 
-```{r weather_plot_precip}shape = RecordP}
+```{r}
 # Get a subset with just the days that had a recod high precip
 Record_weather <- weather |> 
   filter(RecordP == TRUE)
