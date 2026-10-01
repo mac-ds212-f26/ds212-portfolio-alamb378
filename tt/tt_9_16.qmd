@@ -2,6 +2,7 @@
 title: "HW1 - Tidy Tuesday Viz"
 ---
 
+
 ## Getting the Data
 
 ```{r}
