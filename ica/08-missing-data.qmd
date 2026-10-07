@@ -283,6 +283,34 @@ ggplot(airquality, aes(group = Month, y = Ozone)) +
 
 ```
 
+```{r}
+ggplot(airquality, aes(x = Wind, y = is.na(Ozone), fill = is.na(Ozone))) +
+    geom_boxplot()
+
+ggplot(airquality, aes(x = Wind, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(
+        data = airquality |> filter(is.na(Ozone) == TRUE), 
+        mapping = aes(xintercept = Wind),
+        color = "red",
+        alpha = 0.4)
+```
+
+```{r}
+ggplot(airquality, aes(x = Temp, y = is.na(Ozone), fill = is.na(Ozone))) +
+    geom_boxplot()
+
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(
+        data = airquality |> filter(is.na(Ozone) == TRUE), 
+        mapping = aes(xintercept = Temp),
+        color = "red",
+        alpha = 0.4)
+```
+
 
 ## Regression Imputation
 

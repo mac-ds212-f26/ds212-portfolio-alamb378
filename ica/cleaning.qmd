@@ -35,8 +35,8 @@ Carryout the following steps to clean and save the San Francisco Weather data.  
 ```{r}
 # 1.
 library(tidyverse)
-sf_weather <- read_csv("~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv")
-view(sf_weather)
+sf_weather <- read_csv("data/raw/weather.csv")
+#view(sf_weather)
 
 #2. 
 sf_weather_clean <- sf_weather |> 
@@ -53,6 +53,6 @@ sf_weather_clean <- sf_weather |>
   arrange(Month) |> 
   mutate(month_name = month.abb[Month])
 
-write_csv(sf_weather_clean,file="~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv")
+write_csv(sf_weather_clean,file="data/raw/weather.csv")
 ```
 
