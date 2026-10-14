@@ -18,6 +18,13 @@ By the end of this lesson, you should be able to:
 
 
 
+```{r libraries}
+library(tidyverse)
+library(stringr)
+```
+
+
+
 ## Functions
 
 ### Why Functions?
@@ -187,7 +194,16 @@ Write a function that rescales a numeric vector to be between 0 and 1. Below are
 - `x = -3:-1`. Expected output: `0.0 0.5 1.0`
 
 ```{r}
+rescale01 <- function(x){
+  range_x <- range(x, na.rm = TRUE)
+  (x-min(x,na.rm = TRUE))/(range_x[2]-range_x[1])
+}
 
+
+
+rescale01(2:4)
+rescale01(c(-1,0,5))
+rescale01(-3:-1)
 ```
 
 
@@ -196,7 +212,15 @@ Write a function that rescales a numeric vector to be between 0 and 1. Below are
 Write a function that formats a 10-digit phone number nicely as `(###) ###-####`. Your function should work on the following test cases: `c("651-330-8661", "6516966000", "800 867 5309")`. It may help to refer to the `stringr` cheatsheet.
 
 ```{r}
+format_phone_number <- function(nums) {
+    nums <- str_remove_all(nums, "[^[:alnum:]]")
+    area <- str_sub(nums, 1, 3)
+    num3 <- str_sub(nums, 4, 6)
+    num4 <- str_sub(nums, 7, 10)
+    str_glue("({area}) {num3}-{num4}")
+}
 
+format_phone_number(c("651-330-8661", "6516966000", "800 867 5309"))
 ```
 
 
@@ -256,7 +280,7 @@ ggplot() |>
 Error in `layer_sf()`:
 ! `mapping` must be created by `aes()`
 ```
-
+> The positions of the arguemnt is mapping then data, not data then mapping.
 
 ## The `if`-`else if`-`else` Control Structure
 
@@ -296,7 +320,16 @@ Write a function for converting temperatures that takes as input a numeric value
 - To convert Fahrenheit to Celsius: `(Fahrenheit - 32) * 5/9`
 
 ```{r}
+convert_temp <- function(temp, unit) {
+    if (unit=="F") {
+        (temp - 32) * 5/9
+    } else if (unit=="C") {
+        (temp * 9/5) + 32
+    }
+}
 
+convert_temp(0, unit = "C")
+convert_temp(32, unit = "F")
 ```
 
 
@@ -305,7 +338,17 @@ Write a function for converting temperatures that takes as input a numeric value
 Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)
 
 ```{r}
+extract_domain <- function(email) {
+    is_valid <- str_detect(email, "@.+\\..+")
+    if (is_valid) {
+        str_extract(email, "@.+$") |>
+            str_remove("@")
+    } else {
+        "Invalid Email"
+    }
+}
 
+extract_domain(email = "les@mac.edu")
 ```
 
 
@@ -391,7 +434,13 @@ group_means <- function(df, group_var, mean_var) {
 Create a new version of `dplyr::count()` that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the `diamonds` dataset.
 
 ```{r}
+count_w_prob <- function(df, count_var) {
+  df |> 
+    count(pick({{count_var}})) |> 
+    mutate(prob = n/sum(n))
+}
 
+count_w_prob(diamonds, count_var = c(cut, color))
 ```
 
 
@@ -400,7 +449,14 @@ Create a new version of `dplyr::count()` that also shows proportions instead of 
 Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the `diamonds` dataset.
 
 ```{r}
+smoothers <- function(df,x,y){
+  ggplot(data = df, mapping = aes(x={{x}},y={{y}}))+
+    geom_point()+
+    geom_smooth(method = "loess", formula = y ~ x, color = "blue", se = FALSE) +
+    geom_smooth(method = "lm", formula = y ~ x, color = "red", se = FALSE)
+}
 
+smoothers(diamonds, x = carat, y = price)
 ```
 
 
