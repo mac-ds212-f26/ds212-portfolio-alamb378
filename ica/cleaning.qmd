@@ -36,7 +36,6 @@ Carryout the following steps to clean and save the San Francisco Weather data.  
 # 1.
 library(tidyverse)
 sf_weather <- read_csv("data/raw/weather.csv")
-#view(sf_weather)
 
 #2. 
 sf_weather_clean <- sf_weather |> 

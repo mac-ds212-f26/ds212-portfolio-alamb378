@@ -65,12 +65,12 @@ Compare the four ways to create a vector of integers from 1 to 100,000.
 
 ```{r}
 # Example 1: For loop with no storage container; append new value to existing vector
-x <- integer()
-results1 <- bench::mark(
-  for (i in 1:1e5) {
-    x <- c(x, i)
-  }
-)
+#x <- integer()
+#results1 <- bench::mark(
+  #for (i in 1:1e5) {
+    #x <- c(x, i)
+  #}
+#)
 
 # Example 2: For loop with a storage container!
 x <- vector('integer', length = 1e5)

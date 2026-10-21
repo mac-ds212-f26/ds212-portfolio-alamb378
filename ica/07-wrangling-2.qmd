@@ -90,7 +90,9 @@ Create the string `It's Thursday`. What happens if you put the string inside sin
 
 ```{r ex_create_string}
 # write your answer below
-
+x <- "It's Thursday" # We need double quotes because of the apostrophe
+x
+#x <- 'It's Thursday'
 ```
 
 
@@ -114,7 +116,8 @@ Create the string `C:\Users`. What happens when you don't escape the `\`?
 
 ```{r ex_create_string_slash}
 # write your answer below
-
+x <- "C:\\Users"
+str_view(x)
 ```
 
 
@@ -180,7 +183,17 @@ df_dates
 
 ```{r}
 # write your answer below
+df_dates <- tibble(
+    year = 2000:2002,
+    month = c("Jan", "Feb", "Mar"),
+    day = 3:5
+)
 
+df_dates |>
+    mutate(
+        date1 = str_c(month, "-", day, "-", year),
+        date2 = str_glue("{month}-{day}-{year}")
+    )
 ```
 
 
@@ -236,7 +249,17 @@ df
 
 ```{r}
 # write your answer below
+df <- tibble(
+    word_id = 1:3,
+    word = c("replace", "match", "pattern")
+)
 
+df |>
+    mutate(
+        word_length = str_length(word),
+        middle_pos = ceiling(word_length/2),
+        middle_letter = str_sub(word, middle_pos, middle_pos)
+    )
 ```
 
 
@@ -314,7 +337,7 @@ str_view(words, "[^aeiou]y[^aeiou]")
 Using the `words` dataset, find words that have two vowels in a row followed by an "m".
 
 ```{r ex_regex_classes}
-
+str_view(words, "[aeiou][aeiou]m")
 ```
 
 
@@ -333,7 +356,7 @@ Using the `fruit` dataset, find fruits that have a repeated vowel ("aa", "ee", "
 
 ```{r ex_regex_alternation}
 # write your answer below
-
+str_view(fruit, "aa|ee|ii|oo|uu")
 ```
 
 
@@ -349,14 +372,14 @@ Using the `words` dataset, find words that start with "y"
 
 ```{r ex_regex_start_end_group}
 # write your answer below
-
+str_view(words, "^y")
 ```
 
 Using the `words` dataset again, find words that don't start with "y".
 
 ```{r ex_regex_start_end_group_2}
 # write your answer below
-
+str_view(words, "^[^y]")
 ```
 
 
