@@ -91,7 +91,7 @@ results4 <- bench::mark(seq(1,1e5))
 ```{r}
 # Compile Results
 bind_rows(results2, results3, results4) |>
-  mutate(type = c("for_loop_no_storage", "for_loop_with_storage", "purrr_map", "standard_func")) |>
+  mutate(type = c("for_loop_with_storage", "purrr_map", "standard_func")) |>
   select(type, mem_alloc, total_time)  |> print()
 
 ```
