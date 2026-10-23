@@ -418,7 +418,42 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz</span></a>
+  <a href="../ica/04_adv_maps/code/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/07-wrangling-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7 Adv Data wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/08-missing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">title: “8 Missing Data”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/09-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/10-base-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/11-iteration-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11 Loops+Iter I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/12-iteration-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Iteration II</span></a>
   </div>
 </li>
       </ul>
@@ -1133,90 +1168,91 @@ cookieconsent.run({
 <span id="cb17-2"><a href="#cb17-2"></a><span class="an">title:</span><span class="co"> "HW1 - Tidy Tuesday Viz"</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co">---</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">## Getting the Data</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="in">```{r}</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb17-13"><a href="#cb17-13"></a>cafe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cafe.csv'</span>)</span>
-<span id="cb17-14"><a href="#cb17-14"></a>cappuccino_index <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cappuccino_index.csv'</span>)</span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="in">```</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="fu">## Getting the Data</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="in">```{r}</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb17-14"><a href="#cb17-14"></a>cafe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cafe.csv'</span>)</span>
+<span id="cb17-15"><a href="#cb17-15"></a>cappuccino_index <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-09-08/cappuccino_index.csv'</span>)</span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="in">```</span></span>
 <span id="cb17-17"><a href="#cb17-17"></a></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="fu">## Exploring the Data</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a></span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="in">```{r}</span></span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="co"># A breif overview of the data</span></span>
-<span id="cb17-24"><a href="#cb17-24"></a><span class="fu">head</span>(cafe)</span>
-<span id="cb17-25"><a href="#cb17-25"></a><span class="fu">head</span>(cappuccino_index)</span>
-<span id="cb17-26"><a href="#cb17-26"></a><span class="fu">str</span>(cafe)</span>
-<span id="cb17-27"><a href="#cb17-27"></a><span class="fu">str</span>(cappuccino_index)</span>
-<span id="cb17-28"><a href="#cb17-28"></a><span class="in">```</span></span>
-<span id="cb17-29"><a href="#cb17-29"></a></span>
-<span id="cb17-32"><a href="#cb17-32"></a><span class="in">```{r}</span></span>
-<span id="cb17-33"><a href="#cb17-33"></a><span class="co">#A look at variables of interest</span></span>
-<span id="cb17-34"><a href="#cb17-34"></a>cafe <span class="sc">|&gt;</span> </span>
-<span id="cb17-35"><a href="#cb17-35"></a>  <span class="fu">summarize</span>(<span class="at">min_price=</span><span class="fu">min</span>(price_gbp),<span class="at">max_price=</span><span class="fu">max</span>(price_gbp),<span class="at">mean_price=</span><span class="fu">mean</span>(price_gbp),<span class="at">median_price=</span> <span class="fu">median</span>(price_gbp), <span class="at">min_wage =</span> <span class="fu">min</span>(hourly_wage_gbp), <span class="at">max_wage =</span> <span class="fu">max</span>(hourly_wage_gbp),<span class="at">mean_wage =</span> <span class="fu">mean</span>(hourly_wage_gbp),<span class="at">meadian_wage =</span> <span class="fu">median</span>(hourly_wage_gbp))</span>
-<span id="cb17-36"><a href="#cb17-36"></a><span class="in">```</span></span>
-<span id="cb17-37"><a href="#cb17-37"></a></span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="fu">## Exploring the Data</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="in">```{r}</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a><span class="co"># A breif overview of the data</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="fu">head</span>(cafe)</span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="fu">head</span>(cappuccino_index)</span>
+<span id="cb17-27"><a href="#cb17-27"></a><span class="fu">str</span>(cafe)</span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="fu">str</span>(cappuccino_index)</span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="in">```</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="in">```{r}</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="co">#A look at variables of interest</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb17-36"><a href="#cb17-36"></a>  <span class="fu">summarize</span>(<span class="at">min_price=</span><span class="fu">min</span>(price_gbp),<span class="at">max_price=</span><span class="fu">max</span>(price_gbp),<span class="at">mean_price=</span><span class="fu">mean</span>(price_gbp),<span class="at">median_price=</span> <span class="fu">median</span>(price_gbp), <span class="at">min_wage =</span> <span class="fu">min</span>(hourly_wage_gbp), <span class="at">max_wage =</span> <span class="fu">max</span>(hourly_wage_gbp),<span class="at">mean_wage =</span> <span class="fu">mean</span>(hourly_wage_gbp),<span class="at">meadian_wage =</span> <span class="fu">median</span>(hourly_wage_gbp))</span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="in">```</span></span>
 <span id="cb17-38"><a href="#cb17-38"></a></span>
-<span id="cb17-39"><a href="#cb17-39"></a><span class="at">&gt; Interesting, they're is a lot of varitability in the range of both Cappuccino price and Cafe worker wage. I'm corous if the wages or Cappuccino price changes if the cafe is in a rural, suburaban, or urban area.</span></span>
-<span id="cb17-40"><a href="#cb17-40"></a></span>
-<span id="cb17-43"><a href="#cb17-43"></a><span class="in">```{r}</span></span>
-<span id="cb17-44"><a href="#cb17-44"></a><span class="co"># We have to first make a var that shows if the cafe is rural, suburban, urban</span></span>
-<span id="cb17-45"><a href="#cb17-45"></a></span>
-<span id="cb17-46"><a href="#cb17-46"></a>cafe <span class="ot">&lt;-</span> cafe <span class="sc">|&gt;</span></span>
-<span id="cb17-47"><a href="#cb17-47"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">case_when</span>(</span>
-<span id="cb17-48"><a href="#cb17-48"></a>    urban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Urban"</span>,</span>
-<span id="cb17-49"><a href="#cb17-49"></a>    suburban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Suburban"</span>,</span>
-<span id="cb17-50"><a href="#cb17-50"></a>    rural <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Rural"</span></span>
-<span id="cb17-51"><a href="#cb17-51"></a>  ))</span>
-<span id="cb17-52"><a href="#cb17-52"></a><span class="in">```</span></span>
-<span id="cb17-53"><a href="#cb17-53"></a></span>
-<span id="cb17-54"><a href="#cb17-54"></a><span class="at">&gt; Now we have a location variable to use for plots.</span></span>
-<span id="cb17-55"><a href="#cb17-55"></a></span>
+<span id="cb17-39"><a href="#cb17-39"></a></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="at">&gt; Interesting, they're is a lot of varitability in the range of both Cappuccino price and Cafe worker wage. I'm corous if the wages or Cappuccino price changes if the cafe is in a rural, suburaban, or urban area.</span></span>
+<span id="cb17-41"><a href="#cb17-41"></a></span>
+<span id="cb17-44"><a href="#cb17-44"></a><span class="in">```{r}</span></span>
+<span id="cb17-45"><a href="#cb17-45"></a><span class="co"># We have to first make a var that shows if the cafe is rural, suburban, urban</span></span>
+<span id="cb17-46"><a href="#cb17-46"></a></span>
+<span id="cb17-47"><a href="#cb17-47"></a>cafe <span class="ot">&lt;-</span> cafe <span class="sc">|&gt;</span></span>
+<span id="cb17-48"><a href="#cb17-48"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-49"><a href="#cb17-49"></a>    urban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Urban"</span>,</span>
+<span id="cb17-50"><a href="#cb17-50"></a>    suburban <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Suburban"</span>,</span>
+<span id="cb17-51"><a href="#cb17-51"></a>    rural <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Rural"</span></span>
+<span id="cb17-52"><a href="#cb17-52"></a>  ))</span>
+<span id="cb17-53"><a href="#cb17-53"></a><span class="in">```</span></span>
+<span id="cb17-54"><a href="#cb17-54"></a></span>
+<span id="cb17-55"><a href="#cb17-55"></a><span class="at">&gt; Now we have a location variable to use for plots.</span></span>
 <span id="cb17-56"><a href="#cb17-56"></a></span>
-<span id="cb17-57"><a href="#cb17-57"></a><span class="fu">## Data Viz</span></span>
-<span id="cb17-58"><a href="#cb17-58"></a></span>
-<span id="cb17-61"><a href="#cb17-61"></a><span class="in">```{r}</span></span>
-<span id="cb17-62"><a href="#cb17-62"></a><span class="co"># Genral vizualization to look at the relationship of location and price_gbd and hourly_wage_gbp</span></span>
-<span id="cb17-63"><a href="#cb17-63"></a>cafe <span class="sc">|&gt;</span> </span>
-<span id="cb17-64"><a href="#cb17-64"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb17-65"><a href="#cb17-65"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>price_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
-<span id="cb17-66"><a href="#cb17-66"></a></span>
-<span id="cb17-67"><a href="#cb17-67"></a>cafe <span class="sc">|&gt;</span> </span>
-<span id="cb17-68"><a href="#cb17-68"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb17-69"><a href="#cb17-69"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
-<span id="cb17-70"><a href="#cb17-70"></a><span class="in">```</span></span>
-<span id="cb17-71"><a href="#cb17-71"></a></span>
-<span id="cb17-72"><a href="#cb17-72"></a><span class="at">&gt; It seems as though the means of both hourly wage and price of a cappuccino aren't affected by location, but some of the extremes are are more isolated to certain regions. </span></span>
-<span id="cb17-73"><a href="#cb17-73"></a></span>
-<span id="cb17-74"><a href="#cb17-74"></a><span class="at">&gt; Is there a difference in the relationship between hourly wage and the price of a cappuccino in different locations?</span></span>
-<span id="cb17-75"><a href="#cb17-75"></a></span>
+<span id="cb17-57"><a href="#cb17-57"></a></span>
+<span id="cb17-58"><a href="#cb17-58"></a><span class="fu">## Data Viz</span></span>
+<span id="cb17-59"><a href="#cb17-59"></a></span>
+<span id="cb17-62"><a href="#cb17-62"></a><span class="in">```{r}</span></span>
+<span id="cb17-63"><a href="#cb17-63"></a><span class="co"># Genral vizualization to look at the relationship of location and price_gbd and hourly_wage_gbp</span></span>
+<span id="cb17-64"><a href="#cb17-64"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb17-65"><a href="#cb17-65"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb17-66"><a href="#cb17-66"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>price_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb17-67"><a href="#cb17-67"></a></span>
+<span id="cb17-68"><a href="#cb17-68"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb17-69"><a href="#cb17-69"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb17-70"><a href="#cb17-70"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">fill=</span>location), <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb17-71"><a href="#cb17-71"></a><span class="in">```</span></span>
+<span id="cb17-72"><a href="#cb17-72"></a></span>
+<span id="cb17-73"><a href="#cb17-73"></a><span class="at">&gt; It seems as though the means of both hourly wage and price of a cappuccino aren't affected by location, but some of the extremes are are more isolated to certain regions. </span></span>
+<span id="cb17-74"><a href="#cb17-74"></a></span>
+<span id="cb17-75"><a href="#cb17-75"></a><span class="at">&gt; Is there a difference in the relationship between hourly wage and the price of a cappuccino in different locations?</span></span>
 <span id="cb17-76"><a href="#cb17-76"></a></span>
 <span id="cb17-77"><a href="#cb17-77"></a></span>
-<span id="cb17-80"><a href="#cb17-80"></a><span class="in">```{r}</span></span>
-<span id="cb17-81"><a href="#cb17-81"></a>cafe <span class="sc">|&gt;</span> </span>
-<span id="cb17-82"><a href="#cb17-82"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">y=</span>price_gbp))<span class="sc">+</span></span>
-<span id="cb17-83"><a href="#cb17-83"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> location, <span class="at">shape =</span> location), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb17-84"><a href="#cb17-84"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb17-85"><a href="#cb17-85"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-86"><a href="#cb17-86"></a>    <span class="at">title =</span> <span class="st">"Hourly Wage and Cappuccino Price"</span>,</span>
-<span id="cb17-87"><a href="#cb17-87"></a>    <span class="at">subtitle =</span> <span class="st">"Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations."</span>,</span>
-<span id="cb17-88"><a href="#cb17-88"></a>    <span class="at">x =</span> <span class="st">"Hourly Wage (GBD)"</span>, <span class="at">y =</span> <span class="st">"Price of Cappuccino (GBD)"</span>,</span>
-<span id="cb17-89"><a href="#cb17-89"></a>    <span class="at">color =</span> <span class="st">"Urban"</span>, <span class="at">shape =</span> <span class="st">"Urban"</span></span>
-<span id="cb17-90"><a href="#cb17-90"></a>  )<span class="sc">+</span></span>
-<span id="cb17-91"><a href="#cb17-91"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>location)<span class="sc">+</span></span>
-<span id="cb17-92"><a href="#cb17-92"></a>  <span class="fu">scale_color_colorblind</span>()</span>
-<span id="cb17-93"><a href="#cb17-93"></a></span>
-<span id="cb17-94"><a href="#cb17-94"></a><span class="fu">ggsave</span>(<span class="st">"tt_9_16.png"</span>)</span>
-<span id="cb17-95"><a href="#cb17-95"></a><span class="in">```</span></span>
-<span id="cb17-96"><a href="#cb17-96"></a><span class="at">&gt; The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship. </span></span>
-<span id="cb17-97"><a href="#cb17-97"></a></span>
-<span id="cb17-98"><a href="#cb17-98"></a><span class="fu">## Conclusion</span></span>
-<span id="cb17-99"><a href="#cb17-99"></a></span>
-<span id="cb17-100"><a href="#cb17-100"></a><span class="at">&gt; It seems that the mean and distabution of both hourly wage and the price of a cappuccino aren't efffected by location, but the relationship between the varriables is effected by location.</span></span>
+<span id="cb17-78"><a href="#cb17-78"></a></span>
+<span id="cb17-81"><a href="#cb17-81"></a><span class="in">```{r}</span></span>
+<span id="cb17-82"><a href="#cb17-82"></a>cafe <span class="sc">|&gt;</span> </span>
+<span id="cb17-83"><a href="#cb17-83"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hourly_wage_gbp, <span class="at">y=</span>price_gbp))<span class="sc">+</span></span>
+<span id="cb17-84"><a href="#cb17-84"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> location, <span class="at">shape =</span> location), <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb17-85"><a href="#cb17-85"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb17-86"><a href="#cb17-86"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-87"><a href="#cb17-87"></a>    <span class="at">title =</span> <span class="st">"Hourly Wage and Cappuccino Price"</span>,</span>
+<span id="cb17-88"><a href="#cb17-88"></a>    <span class="at">subtitle =</span> <span class="st">"Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations."</span>,</span>
+<span id="cb17-89"><a href="#cb17-89"></a>    <span class="at">x =</span> <span class="st">"Hourly Wage (GBD)"</span>, <span class="at">y =</span> <span class="st">"Price of Cappuccino (GBD)"</span>,</span>
+<span id="cb17-90"><a href="#cb17-90"></a>    <span class="at">color =</span> <span class="st">"Urban"</span>, <span class="at">shape =</span> <span class="st">"Urban"</span></span>
+<span id="cb17-91"><a href="#cb17-91"></a>  )<span class="sc">+</span></span>
+<span id="cb17-92"><a href="#cb17-92"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>location)<span class="sc">+</span></span>
+<span id="cb17-93"><a href="#cb17-93"></a>  <span class="fu">scale_color_colorblind</span>()</span>
+<span id="cb17-94"><a href="#cb17-94"></a></span>
+<span id="cb17-95"><a href="#cb17-95"></a><span class="fu">ggsave</span>(<span class="st">"tt_9_16.png"</span>)</span>
+<span id="cb17-96"><a href="#cb17-96"></a><span class="in">```</span></span>
+<span id="cb17-97"><a href="#cb17-97"></a><span class="at">&gt; The graph shows a positive relationship between hourly wage and the price of a cappuccino across all three locations: urban, suburban, and rural. However, the strength of the relationship varies by location; the suburban location shows the weakest correlation, while the urban location shows the strongest. This disparity may be driven by pronounced outliers in the urban dataset that are skewing the relationship. </span></span>
+<span id="cb17-98"><a href="#cb17-98"></a></span>
+<span id="cb17-99"><a href="#cb17-99"></a><span class="fu">## Conclusion</span></span>
+<span id="cb17-100"><a href="#cb17-100"></a></span>
+<span id="cb17-101"><a href="#cb17-101"></a><span class="at">&gt; It seems that the mean and distabution of both hourly wage and the price of a cappuccino aren't efffected by location, but the relationship between the varriables is effected by location.</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

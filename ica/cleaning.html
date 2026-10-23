@@ -418,7 +418,42 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz</span></a>
+  <a href="../ica/04_adv_maps/code/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/06-wrangling-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">6 Adv Data wrangling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/07-wrangling-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">7 Adv Data wrangling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/08-missing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">title: “8 Missing Data”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/09-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/10-base-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/11-iteration-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">11 Loops+Iter I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/12-iteration-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Iteration II</span></a>
   </div>
 </li>
       </ul>
@@ -524,25 +559,24 @@ cookieconsent.run({
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># 1.</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>sf_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">view</span>(sf_weather)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#2. </span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr,<span class="dv">99999</span>))</span>
+<span id="cb1-3"><a href="#cb1-3"></a>sf_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/weather.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#2. </span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr,<span class="dv">99999</span>))</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#3.</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">arrange</span>(Month, Day) <span class="sc">|&gt;</span> </span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">365</span>, <span class="at">by=</span><span class="dv">1</span>))</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#4.</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">arrange</span>(Month) <span class="sc">|&gt;</span> </span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month])</span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">write_csv</span>(sf_weather_clean,<span class="at">file=</span><span class="st">"~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#3.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">arrange</span>(Month, Day) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">365</span>, <span class="at">by=</span><span class="dv">1</span>))</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#4.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">arrange</span>(Month) <span class="sc">|&gt;</span> </span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month])</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="fu">write_csv</span>(sf_weather_clean,<span class="at">file=</span><span class="st">"data/raw/weather.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
@@ -1065,26 +1099,25 @@ cookieconsent.run({
 <span id="cb2-37"><a href="#cb2-37"></a><span class="in">```{r}</span></span>
 <span id="cb2-38"><a href="#cb2-38"></a><span class="co"># 1.</span></span>
 <span id="cb2-39"><a href="#cb2-39"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-40"><a href="#cb2-40"></a>sf_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv"</span>)</span>
-<span id="cb2-41"><a href="#cb2-41"></a><span class="fu">view</span>(sf_weather)</span>
-<span id="cb2-42"><a href="#cb2-42"></a></span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="co">#2. </span></span>
-<span id="cb2-44"><a href="#cb2-44"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb2-45"><a href="#cb2-45"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr,<span class="dv">99999</span>))</span>
+<span id="cb2-40"><a href="#cb2-40"></a>sf_weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/weather.csv"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="co">#2. </span></span>
+<span id="cb2-43"><a href="#cb2-43"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb2-44"><a href="#cb2-44"></a>  <span class="fu">mutate</span>(<span class="at">PrecipYr =</span> <span class="fu">na_if</span>(PrecipYr,<span class="dv">99999</span>))</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
 <span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a></span>
-<span id="cb2-48"><a href="#cb2-48"></a><span class="co">#3.</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb2-50"><a href="#cb2-50"></a>  <span class="fu">arrange</span>(Month, Day) <span class="sc">|&gt;</span> </span>
-<span id="cb2-51"><a href="#cb2-51"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">365</span>, <span class="at">by=</span><span class="dv">1</span>))</span>
-<span id="cb2-52"><a href="#cb2-52"></a></span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="co">#4.</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
-<span id="cb2-55"><a href="#cb2-55"></a>  <span class="fu">arrange</span>(Month) <span class="sc">|&gt;</span> </span>
-<span id="cb2-56"><a href="#cb2-56"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month])</span>
-<span id="cb2-57"><a href="#cb2-57"></a></span>
-<span id="cb2-58"><a href="#cb2-58"></a><span class="fu">write_csv</span>(sf_weather_clean,<span class="at">file=</span><span class="st">"~/Course Work/stat212/repos/ds212-portfolio-alamb378/ica/data/raw/weather.csv"</span>)</span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="in">```</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="co">#3.</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb2-49"><a href="#cb2-49"></a>  <span class="fu">arrange</span>(Month, Day) <span class="sc">|&gt;</span> </span>
+<span id="cb2-50"><a href="#cb2-50"></a>  <span class="fu">mutate</span>(<span class="at">dateInYear =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">365</span>, <span class="at">by=</span><span class="dv">1</span>))</span>
+<span id="cb2-51"><a href="#cb2-51"></a></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="co">#4.</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a>sf_weather_clean <span class="ot">&lt;-</span> sf_weather <span class="sc">|&gt;</span> </span>
+<span id="cb2-54"><a href="#cb2-54"></a>  <span class="fu">arrange</span>(Month) <span class="sc">|&gt;</span> </span>
+<span id="cb2-55"><a href="#cb2-55"></a>  <span class="fu">mutate</span>(<span class="at">month_name =</span> month.abb[Month])</span>
+<span id="cb2-56"><a href="#cb2-56"></a></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="fu">write_csv</span>(sf_weather_clean,<span class="at">file=</span><span class="st">"data/raw/weather.csv"</span>)</span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
