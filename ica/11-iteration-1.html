@@ -772,7 +772,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                            min  median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                       &lt;bch:tm&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 for (i in 1:1e+05) { x[i] &lt;- i }   4.71ms  5.98ms      167.     402KB     2.03</code></pre>
+1 for (i in 1:1e+05) { x[i] &lt;- i }   2.13ms  2.38ms      408.     402KB     6.16</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Example 3: Vectorized function</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="co">#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)</span></span>
@@ -783,7 +783,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                 &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 x &lt;- seq(1, 1e+05, by = 1)    591µs    646µs     1292.    1.91MB     61.5</code></pre>
+1 x &lt;- seq(1, 1e+05, by = 1)    241µs    257µs     3154.    1.91MB     151.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Pair Programming">
@@ -1021,20 +1021,20 @@ Coefficients:
 <pre><code>$mean
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x00000256c3c0fd20&gt;
+&lt;bytecode: 0x000001f1e8c07d20&gt;
 &lt;environment: namespace:base&gt;
 
 $med
 function (x, na.rm = FALSE, ...) 
 UseMethod("median")
-&lt;bytecode: 0x00000256c2d3c3c0&gt;
+&lt;bytecode: 0x000001f1e7d0c3c0&gt;
 &lt;environment: namespace:stats&gt;
 
 $sd
 function (x, na.rm = FALSE) 
 sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
     na.rm = na.rm))
-&lt;bytecode: 0x00000256c75a0740&gt;
+&lt;bytecode: 0x000001f1f34359a0&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">str</span>(list_of_fcts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
