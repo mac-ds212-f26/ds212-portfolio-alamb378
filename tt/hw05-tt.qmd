@@ -1,0 +1,197 @@
+---
+title: "Homework 05"
+---
+
+
+## TidyTuesday Part (Optional)
+
+::: {.callout-important title="Instructions"}
+You can count work on this week's TidyTuesday toward the exceptional work.
+:::
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story mainly composed of [effective visualizations](https://docs.google.com/presentation/d/1Q-C0sFxYGQvkxb6PU6OM_YOv6Nilalpk-IWb362PoRc/preview?slide=id.g13360dab5d5_0_61#slide=id.g13360dab5d5_0_61).  Provide sufficient background for readers to grasp your narrative.  Refer to the Homework Instructions ⭐ page on the course website for details on how to submit this part.
+
+## Getting the Data
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+library(ggthemes)
+ai_salary <- read_csv('data/raw/ai_salary_majors.csv')
+major_occupations <- read_csv('data/raw/major_occupations.csv')
+
+```
+
+
+## Exploring the Data
+
+```{r}
+# A breif overview of the data
+head(ai_salary)
+str(ai_salary)
+head(major_occupations)
+str(major_occupations)
+
+
+ai_salary |> 
+  summarise(max = max(ai_exposure_percentile), min = min(ai_exposure_percentile), mean = mean(ai_exposure_percentile))
+```
+
+```{r}
+#A look at variables of interest
+ai_salary |> 
+  group_by(broad_field_short) |> 
+  mutate(amount = n()) |> 
+  ungroup() |> 
+  filter(ai_exposure_percentile >= 75) |> 
+  ggplot(aes(x = ai_exposure_percentile, fill = fct_reorder(broad_field_short, ai_exposure_percentile))) +
+  geom_boxplot()
+
+Q4_percentile_ai_salary <- ai_salary |> 
+  group_by(broad_field_short) |> 
+  mutate(amount = n(), median_sal_by_field = mean(median_starting_salary)) |> 
+  ungroup() |> 
+  filter(ai_exposure_percentile >= 75)
+
+```
+
+
+> Interesting, here are the feilds that are in the 75th percentile and up, ai seems to impact a wide range of feilds from english to competer science. 
+
+```{r}
+# We have to first make a var that shows if the cafe is rural, suburban, urban
+q1 <- quantile(Q4_percentile_ai_salary$median_starting_salary, 0.25, na.rm = T)
+q3 <- quantile(Q4_percentile_ai_salary$median_starting_salary, 0.75, na.rm = T)
+
+new_Q4_percentile_ai_salary <- Q4_percentile_ai_salary |> 
+  group_by(broad_field_short) |> 
+  mutate(starting_salary_Low = (median_sal_by_field < q1), 
+         starting_salary_Med = ((q1 <= median_sal_by_field) & (median_sal_by_field <= q3)),
+         starting_salary_High = (median_sal_by_field > q3)) |> 
+  pivot_longer(cols = c(starting_salary_Low, starting_salary_Med, starting_salary_High), names_to = "salary", names_prefix = "starting_salary_", values_to = "yes_no") |> 
+  filter(yes_no == T)
+dim(Q4_percentile_ai_salary) 
+new_Q4_percentile_ai_salary
+  
+```
+
+> Now we have three levels of salary: high, med, low
+
+> Is there a difference in the relationship between median starting salary years and ai exposure?
+## Data Viz
+
+```{r}
+# Looking at the general corralation of starting salary and ai exposure percentile
+
+ai_salary |> 
+  ggplot(aes(x=median_starting_salary, y=ai_exposure)) +
+  geom_point()+
+  geom_smooth()
+
+# let see if there is a little bit more of one in the q4 data set
+
+Q4_percentile_ai_salary |> 
+  ggplot(aes(x=median_starting_salary, y=ai_exposure))+
+  geom_point()+
+  geom_smooth()
+
+# Now lets try to color by salary
+
+
+  
+
+
+
+```
+
+> It seems as though there isn't a large corralation between salary and ai exposure, ai is
+
+> Is there a difference in the relationship between median salary after 4 years and ai exposure?
+
+```{r}
+# Looking at the general corralation of starting salary and ai exposure percentile
+
+ai_salary |> 
+  ggplot(aes(x=median_salary_4yr, y=ai_exposure)) +
+  geom_point()+
+  geom_smooth()
+
+# let see if there is a little bit more of one in the q4 data set
+
+Q4_percentile_ai_salary |> 
+  ggplot(aes(x=median_salary_4yr, y=ai_exposure))+
+  geom_point()+
+  geom_smooth()
+
+# Now lets try to color by salary
+
+new_Q4_percentile_ai_salary |> 
+  ggplot(aes(x=median_salary_4yr,y=ai_exposure, color=salary))+
+  geom_point()+
+  geom_smooth()
+
+```
+
+
+```{r fig.height=10}
+new_Q4_percentile_ai_salary |> 
+  ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure))) +
+  geom_boxplot()+
+  facet_wrap(~salary, ncol = 1, scales = "free_y")
+
+# Attempt 1
+
+new_Q4_percentile_ai_salary |> 
+  ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure))) +
+  geom_boxplot()+
+  facet_wrap(~fct_relevel(salary, c("High", "Med", "Low")), ncol = 1, scales = "free_y") + 
+  labs(title = "Fields Most Exposed to AI", subtitle = "Highest AI exposure to fields, by starting salary level", y="", x="AI Exposure", caption = "By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26")+
+  theme_minimal()+
+  theme(strip.text = element_text(hjust = 0, face = "bold"), plot.caption = element_text(hjust = 0))
+
+
+```
+
+```{r fig.height=10}
+# Attempt 2
+library(ggridges)
+library(janitor)
+
+
+new_Q4_percentile_ai_salary |> 
+  get_dupes(broad_field_short, salary) |> 
+  filter(broad_field_short %in% c("Mathematics & Statistics", "Philosophy & Religion", "Interdisciplinary", "English", "Theology & Religion", "Business", "Education", "Physical Sciences", "Social Sciences", "Foreign Languages")) |> 
+  ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure), fill = fct_relevel(salary, c("High", "Med", "Low")))) +
+  geom_density_ridges(scale = 1)+
+  scale_fill_manual(values = c("forestgreen", "green", "lightgreen"))+
+  labs(title = "Distribution of AI Exposure by Field Separated by Salary level", subtitle = "AI exposure is disproportionately affecting low starting salary fields, such as Philosophy, English, Religion more than higher starting salary fields such as Business and Foreign Languages", y="", x="Density of AI Exposure", caption = "By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
+*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 Perecntile out of the reported starting salary in the data", fill = "Salary*")+
+  theme_minimal()+
+  theme(plot.caption = element_text(hjust = 0), plot.title = element_text(hjust = -0.1, face = "bold"), plot.subtitle = element_text(hjust = -0.72))
+
+ggsave("tt_10_27_6.png")
+```
+
+
+```{r}
+new_Q4_percentile_ai_salary |> 
+  get_dupes(broad_field_short, salary) |> 
+  filter(broad_field_short %in% c("Mathematics & Statistics", "Philosophy & Religion", "Interdisciplinary", "English", "Theology & Religion", "Business", "Education", "Physical Sciences", "Social Sciences", "Foreign Languages")) |> 
+  ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure), fill = fct_relevel(salary, c("High", "Med", "Low")))) +
+  geom_boxplot()+
+  scale_fill_manual(values = c("forestgreen", "green", "lightgreen"))+
+  labs(title = "Distribution of AI Exposure by Field Separated by Salary level", subtitle = "AI exposure is disproportionately affecting low starting salary fields", y="", x="AI Exposure", caption = "By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
+*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 
+Perecntile out of the reported starting salary in the data", fill = "Salary*")+
+  theme_minimal()+
+  theme(plot.caption = element_text(hjust = 0), plot.title = element_text(hjust = 0, face = "bold"), plot.subtitle = element_text(hjust = 0))
+
+ggsave("tt_10_27_7.png")
+```
+
+
+> The graph shows the feilds that have a med starting income have more fields effected then the low and high salary starting pay jobs. This may be due to the fact that most jobs will fall in the middle of the distabution. This is still interesting to consider. Especially since historicaly big leaps in technonlgy disporpotialy effect work class people.  
+
+## Conclusion
+
+> It seems that AI is effecting almost all fields no matter what you major in college, but the effects might not be equal. 

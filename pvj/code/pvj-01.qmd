@@ -1,0 +1,43 @@
+---
+title: "Personal Visualization Journey"
+author: "Andrew Lamb"
+date: now
+date-format: "YYYY-MM-DDTHH:mm:ssZ"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+    code-tools: true   
+    df-print: paged
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+# Loading Packages
+
+```{r}
+library(tidyverse)
+```
+
+
+# Loading data
+
+```{r}
+lifts <- read.csv("../data/raw/Teambuildr Raw Data Report Andrew Lamb.csv")
+
+head(lifts)
+```
+
+# Looking at the data
+
+```{r}
+lifts <- lifts |> 
+  group_by(Exercise.Name) |> 
+  mutate(Times.lifted = n()) |> 
+  arrange(desc(Times.lifted))
+
+
+```
+

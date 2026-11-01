@@ -2,7 +2,6 @@
 title: "HW1 - Tidy Tuesday Viz"
 ---
 
-
 ## Getting the Data
 
 ```{r}
@@ -68,18 +67,35 @@ cafe |>
 
 ```{r}
 
-cafe |> 
-  ggplot(aes(x=hourly_wage_gbp, y=price_gbp))+
-  geom_point(aes(color = location, shape = location), alpha = 0.5)+
-  geom_smooth(method = "lm")+
+
+
+cafe <- cafe |> 
+  mutate(city_country = paste(city, country), sep = "' ")
+
+outliers <- cafe |> 
+  filter(price_gbp > 7.6)
+
+St_Moritz_outier <- outliers |> 
+  filter(city == "St. Moritz")
+
+other_outlier <- outliers |> 
+  filter(city != "St. Moritz")
+
+ 
+ggplot(data = cafe, aes(x=hourly_wage_gbp, y=price_gbp))+
+  geom_point(alpha = 0.25)+
+  geom_smooth(method = "lm", se = FALSE)+
+  geom_text(data = other_outlier, aes(x=hourly_wage_gbp, y=price_gbp, label = city_country), hjust = .25, vjust = 1.25, size = 3)+
+  geom_text(data = St_Moritz_outier, aes(x=hourly_wage_gbp, y=price_gbp, label = city_country), hjust = 1, vjust = 1.25, size = 3)+
   labs(
-    title = "Hourly Wage and Cappuccino Price",
-    subtitle = "Comparasion of the hourly wage of cafe workers and the price a cappuccino in different locations.",
-    x = "Hourly Wage (GBD)", y = "Price of Cappuccino (GBD)",
-    color = "Urban", shape = "Urban"
+    title = "Comparison of the relationship between hourly wage of cafe workers and 
+the price a cappuccino in different locations.",
+    subtitle = "Positive corralation of hourly wage and price of a cappuccino
+which varries in strength by location.",
+    x = "Hourly Wage (Great British Pounds)", y = "Price of Cappuccino (Great British Pounds)", 
+    caption = "By: Andrew Lamb, Created on: 9/28/2026, Data from: Cappaccino Index, Tidy Tuesday 9/16/26"
   )+
-  facet_wrap(~location)+
-  scale_color_colorblind()
+  facet_wrap(~location, scales = "free_x")
 
 ggsave("tt_9_16.png")
 ```
