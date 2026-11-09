@@ -1,0 +1,68 @@
+---
+title: "Homework 07"
+---
+
+
+## TidyTuesday Part (Optional)
+
+::: {.callout-important title="Instructions"}
+You can count work on this week's TidyTuesday toward the exceptional work.
+:::
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story mainly composed of [effective visualizations](https://docs.google.com/presentation/d/1Q-C0sFxYGQvkxb6PU6OM_YOv6Nilalpk-IWb362PoRc/preview?slide=id.g13360dab5d5_0_61#slide=id.g13360dab5d5_0_61).  Provide sufficient background for readers to grasp your narrative.  Refer to the Homework Instructions ⭐ page on the course website for details on how to submit this part.
+
+
+```{r}
+library(tidyverse)
+
+grambank_languages <- read_csv("data/raw/grambank_languages.csv")
+```
+
+```{r}
+head(grambank_languages)
+```
+
+```{r}
+grambank_languages |> 
+  count(family_name) |> 
+  arrange(desc(n))
+
+```
+
+```{r}
+library(leaflet)
+
+grambank_languages <- grambank_languages |> 
+  filter(!is.na(macroarea))
+
+grambank_languages
+
+pal <- colorFactor(palette = "YlOrRd", domain = grambank_languages$macroarea)
+
+
+leaflet(data = grambank_languages) |> 
+  addProviderTiles("Esri.WorldStreetMap") %>%
+  addCircles(label = grambank_languages$family_name, 
+             color = ~pal(grambank_languages$macroarea)) |> 
+  addLegend("bottomright", pal = pal, values = ~grambank_languages$macroarea, title = "Macro Area")
+
+
+
+
+```
+
+
+```{r}
+grambank_languages |> 
+  mutate(lang_og = sub("(/.*)", "", lineage)) |> 
+  filter(!is.na(lang_og)) |> 
+  group_by(lang_og) |> 
+  summarise(popularity = n()) |> 
+  arrange(desc(popularity)) |> 
+  select(lang_og, )
+
+
+```
+
+
+

@@ -164,12 +164,13 @@ new_Q4_percentile_ai_salary |>
   ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure), fill = fct_relevel(salary, c("High", "Med", "Low")))) +
   geom_density_ridges(scale = 1)+
   scale_fill_manual(values = c("forestgreen", "green", "lightgreen"))+
-  labs(title = "Distribution of AI Exposure by Field Separated by Salary level", subtitle = "AI exposure is disproportionately affecting low starting salary fields, such as Philosophy, English, Religion more than higher starting salary fields such as Business and Foreign Languages", y="", x="Density of AI Exposure", caption = "By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
-*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 Perecntile out of the reported starting salary in the data", fill = "Salary*")+
+  labs(title = "Distribution of AI Exposure by Field Separated by Salary* level", subtitle = "AI exposure is disproportionately affecting low starting salary fields, such as Philosophy, English, Religion more than higher starting salary fields such as Business and Foreign Languages", y="", x="Density of AI Exposure", caption = "
+                By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
+*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 Perecntile out of the reported starting salary in the data", fill = "Salary")+
   theme_minimal()+
-  theme(plot.caption = element_text(hjust = 0), plot.title = element_text(hjust = -0.1, face = "bold"), plot.subtitle = element_text(hjust = -0.72))
+  theme(plot.caption = element_text(hjust = -.3, size = 12, color = "darkgrey"), plot.title = element_text(hjust = -.15, face = "bold", size = 16), plot.subtitle = element_text(hjust = -1.23), axis.text.y = element_text(size = 12))
 
-ggsave("tt_10_27_6.png")
+#ggsave("tt_10_27_8.png")
 ```
 
 
@@ -181,17 +182,39 @@ new_Q4_percentile_ai_salary |>
   geom_boxplot()+
   scale_fill_manual(values = c("forestgreen", "green", "lightgreen"))+
   labs(title = "Distribution of AI Exposure by Field Separated by Salary level", subtitle = "AI exposure is disproportionately affecting low starting salary fields", y="", x="AI Exposure", caption = "By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
-*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 
-Perecntile out of the reported starting salary in the data", fill = "Salary*")+
+*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, 
+High = 75-100, Perecntile out of the reported starting salary in the data", fill = "Salary*")+
   theme_minimal()+
-  theme(plot.caption = element_text(hjust = 0), plot.title = element_text(hjust = 0, face = "bold"), plot.subtitle = element_text(hjust = 0))
+  theme(plot.caption = element_text(hjust = 0), plot.title = element_text(hjust = 1, face = "bold"), plot.subtitle = element_text(hjust = 14))
 
 ggsave("tt_10_27_7.png")
 ```
 
+```{r fig.height=10}
+# Attempt 2
+library(ggridges)
+library(janitor)
 
-> The graph shows the feilds that have a med starting income have more fields effected then the low and high salary starting pay jobs. This may be due to the fact that most jobs will fall in the middle of the distabution. This is still interesting to consider. Especially since historicaly big leaps in technonlgy disporpotialy effect work class people.  
+
+new_Q4_percentile_ai_salary |> 
+  get_dupes(broad_field_short, salary) |> 
+  filter(broad_field_short %in% c("Mathematics & Statistics", "Philosophy & Religion", "Interdisciplinary", "English", "Theology & Religion", "Business", "Education", "Physical Sciences", "Social Sciences", "Foreign Languages")) |> 
+  ggplot(aes(x = ai_exposure, y=fct_reorder(broad_field_short, ai_exposure), fill = fct_relevel(salary, c("High", "Med", "Low")))) +
+  geom_density_ridges(scale = 1)+
+  scale_fill_manual(values = c("forestgreen", "green", "lightgreen"))+
+  labs(title = "Distribution of AI Exposure by Field Separated by Salary* level", subtitle = "AI exposure is disproportionately affecting low starting salary fields, such as Philosophy, English, Religion more than higher starting salary fields such as Business and Foreign Languages", y="", x="Density of AI Exposure", caption = "
+                By: Andrew Lamb, Created:10/27/26, Data:AI Salary Majors, TidyTuesday 10/20/26
+*Salary: Low = 0-25 Perecntile, Med = 25-75 Perecntile, High = 75-100 Perecntile out of the reported starting salary in the data", fill = "Salary")+
+  theme_minimal()+
+  theme(plot.caption = element_text(hjust = -.3, size = 12, color = "darkgrey"), plot.title = element_text(hjust = -.15, face = "bold", size = 16), plot.subtitle = element_text(hjust = -1.23), axis.text.y = element_text(size = 12))
+
+#ggsave("tt_10_27_8.png")
+```
+
+
+
+> The graph shows the fields with lower salary have higher distabution then the fields with medium salary, showing a dispaportinate effects on lower salary workers vs higher paid workers. There is an outlier with math and statistics having the highest AI exposure and having high starting salary. This can be explained by the expertise AI has for those fields, but generally lower starting salary jobs have higher exposer rates. 
 
 ## Conclusion
 
-> It seems that AI is effecting almost all fields no matter what you major in college, but the effects might not be equal. 
+> It seems that AI is effecting almost all fields no matter what you major in college, but the effects might not be equal.
