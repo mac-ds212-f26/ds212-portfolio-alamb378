@@ -70,6 +70,7 @@ book:
       - tt/2025-07-15.qmd
       - tt/tt_9_16.qmd
       - tt/hw05-tt.qmd
+      - tt/hw07-tt.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
@@ -89,6 +90,9 @@ book:
       - ica/10-base-r.qmd
       - ica/11-iteration-1.qmd
       - ica/12-iteration-2.qmd
+      - ica/14-apis-2.qmd
+      - ica/15-scraping.qmd
+      - ica/16-databases.qmd
 
     - part: "Extras"
       chapters:

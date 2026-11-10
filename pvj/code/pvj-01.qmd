@@ -106,7 +106,8 @@ compound_lifts |>
 *RDL Group: BB RDL, BB RDL - Staggered Stance
 *Squat Group: HB Split Squat, BB 1/4 Squat from Pin, BB Back Squat - From Pins, BB Front Squat, Front Squat - Pins
 *BB = Barbell, *HB: Hex Bar")
-  
+
+ggsave("pvj_1.png")
 ```
 
 ```{r fig.height=12}
@@ -117,7 +118,6 @@ compound_lifts |>
   filter(Set <= 4, Set !=10) |> 
   ggplot(aes(x=Weight, y = Set, color = Lift.Group))+
   geom_boxplot() +
-  facet_wrap(~Lift.Group, ncol = 1, scale = "free_y")+
   theme_minimal()+
   theme(strip.text = element_text(hjust = 0, face = "bold", size = 14), plot.title = element_text(hjust = 0, face = "bold", size = 16), plot.caption = element_text(hjust = 0, size = 14), plot.subtitle = element_text(size = 14))+
   labs(title = "Distabution of the Weight Lifted of Compound Lift Groups, by Sets", subtitle = "There is a genral trend of weight increasing from set to set from Oct 2025 to Oct 2026", x = "Weight Lifted (in pounds)", y = "Number of Sets Lifted in one session", caption = "By: Andrew Lamb, Created:11/2/26, Data: Personal Lifting Data, TeamBuildr 10/24/26
@@ -129,6 +129,7 @@ compound_lifts |>
 *Squat Group: HB Split Squat, BB 1/4 Squat from Pin, BB Back Squat - From Pins, BB Front Squat, Front Squat - Pins
 *BB = Barbell, *HB: Hex Bar")
 
+ggsave("pvj_2.png")
 ```
 
 
