@@ -66,8 +66,6 @@ book:
 
     - part: "TidyTuesday"
       chapters:
-      - tt/2025-07-08.qmd
-      - tt/2025-07-15.qmd
       - tt/tt_9_16.qmd
       - tt/hw05-tt.qmd
       - tt/hw07-tt.qmd

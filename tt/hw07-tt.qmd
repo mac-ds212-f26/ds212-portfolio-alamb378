@@ -51,7 +51,10 @@ leaflet(data = grambank_languages) |>
   addProviderTiles("Esri.WorldStreetMap") %>%
   addCircles(label = grambank_languages$family_name, 
              color = ~pal(grambank_languages$macroarea)) |> 
-  addLegend("bottomright", pal = pal, values = ~grambank_languages$macroarea, title = "Macro Area")
+  addLegend("bottomright", pal = pal, values = ~grambank_languages$macroarea, title = "Macro Area") |> 
+  addControl("<h4>Are languages more consitiant with there macro area</h4>", position = "topleft") |> 
+  addControl("<h10>Lanuages stay in there macro area</h10>", position = "topleft") |> 
+  addControl("<p>By: Andrew Lamb, Created:11/9/26, Data:Grambank, TidyTuesday 11/3/26</p>", position = "bottomleft")
 
 
 
@@ -88,8 +91,22 @@ langs_w_most_common_roots <- grambank_languages |>
   filter(!is.na(lang_og)) |> 
   semi_join(pop_lang)
 
+langs_w_most_common_roots
+
+langs_w_most_common_roots |> 
+  ggplot(aes(y=fct_infreq(lang_og), fill = macroarea))+
+  geom_bar(position = "fill")+
+  scale_fill_viridis_d()
+  
 
 
+```
+> This is interesting, when only focusing on the current languages that stem from the 10 most popular language roots the trend shown in the first map doesn't hold true. 
+
+
+> What would it look like when only these filtered languages? Where are they concentrated, what are there macro areas?
+
+```{r}
 leaflet(data = langs_w_most_common_roots) |> 
   addProviderTiles("Esri.WorldStreetMap") %>%
   addCircles(label = grambank_languages$language_name, 
@@ -98,8 +115,8 @@ leaflet(data = langs_w_most_common_roots) |>
   addControl("<h4>Where are the languages that stem from the top ten langauge roots</h4>", position = "topleft") |> 
   addControl("<h10>There is a higher concentration in Subsahairn Africa and Southern Asia</h10>", position = "topleft") |> 
   addControl("<p>By: Andrew Lamb, Created:11/9/26, Data:Grambank, TidyTuesday 11/3/26</p>", position = "bottomleft")
-
 ```
+
 
 
 > There is a heavy concentraition of languages that stem from the ten most popular language roots in Subsahairn Africa, Southern Asia and Australia, this would make some sense because these are places where early civilazations grew from. 
