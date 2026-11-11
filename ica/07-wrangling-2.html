@@ -376,6 +376,11 @@ cookieconsent.run({
   <a href="../tt/hw05-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 05</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/hw07-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 07</span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -461,6 +466,21 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ica/12-iteration-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">12 Iteration II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/14-apis-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/15-scraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web Scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/16-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
   </div>
 </li>
       </ul>
@@ -695,8 +715,8 @@ cookieconsent.run({
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">str_view</span>(string1, <span class="at">html =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div class="str_view html-widget html-fill-item" id="htmlwidget-3f8946de0508a5879aae" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-3f8946de0508a5879aae">{"x":{"html":"<ul>\n  <li><pre>Record temp:<span class='special'>\t<\/span>102<\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item" id="htmlwidget-004b2c227820dae4c713" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-004b2c227820dae4c713">{"x":{"html":"<ul>\n  <li><pre>Record temp:<span class='special'>\t<\/span>102<\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section><section id="combine" class="level3"><h3 class="anchored" data-anchor-id="combine">Combine</h3>
@@ -884,34 +904,32 @@ cookieconsent.run({
 <span id="cb63-2"><a href="#cb63-2"></a><span class="fu">data</span>(fruit)</span>
 <span id="cb63-3"><a href="#cb63-3"></a><span class="fu">sample</span>(fruit, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code> [1] "blood orange"      "kumquat"           "cucumber"         
- [4] "avocado"           "grapefruit"        "apple"            
- [7] "pineapple"         "olive"             "purple mangosteen"
-[10] "strawberry"       </code></pre>
+<pre><code> [1] "canary melon" "salal berry"  "kumquat"      "raspberry"    "orange"      
+ [6] "tamarillo"    "kiwi fruit"   "mango"        "grape"        "redcurrant"  </code></pre>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">data</span>(words)</span>
 <span id="cb65-2"><a href="#cb65-2"></a><span class="fu">sample</span>(words, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code> [1] "present" "europe"  "any"     "music"   "girl"    "notice"  "expect" 
- [8] "call"    "bit"     "order"  </code></pre>
+<pre><code> [1] "good"      "thou"      "twelve"    "big"       "spend"     "none"     
+ [7] "bother"    "appear"    "secretary" "quiet"    </code></pre>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">data</span>(sentences)</span>
 <span id="cb67-2"><a href="#cb67-2"></a><span class="fu">sample</span>(sentences, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code> [1] "A siege will crack the strong defense."      
- [2] "The little tales they tell are false."       
- [3] "Code is used when secrets are sent."         
- [4] "Jerk the rope and the bell rings weakly."    
- [5] "The meal was cooked before the bell rang."   
- [6] "We don't like to admit our small faults."    
- [7] "The brass tube circled the high wall."       
- [8] "Two blue fish swam in the tank."             
- [9] "He wheeled the bike past the winding road."  
-[10] "They felt gay when the ship arrived in port."</code></pre>
+<pre><code> [1] "The desk and both chairs were painted tan."        
+ [2] "The green light in the brown box flickered."       
+ [3] "Brass rings are sold by these natives."            
+ [4] "The peace league met to discuss their plans."      
+ [5] "The bank pressed for payment of the debt."         
+ [6] "Grape juice and water mix well."                   
+ [7] "Shake the dust from your shoes, stranger."         
+ [8] "Mud was spattered on the front of his white shirt."
+ [9] "We find joy in the simplest things."               
+[10] "The little tales they tell are false."             </code></pre>
 </div>
 </div>
 <p>We can use <code>str_view()</code> with the <code>pattern</code> argument to see what parts of a string match the regex supplied in the <code>pattern</code> argument. (Matches are enclosed in <code>&lt;&gt;</code>.)</p>
