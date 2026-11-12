@@ -1,0 +1,122 @@
+---
+title: "Personal Visualization Journey"
+---
+
+# Loading Packages
+
+```{r}
+library(tidyverse)
+```
+
+
+# Loading data
+
+```{r}
+lifts <- read.csv("../data/raw/Teambuildr Raw Data Report Andrew Lamb.csv")
+
+head(lifts)
+
+dim(lifts)
+```
+
+# Looking at the data
+
+```{r}
+lifts <- lifts |> 
+  group_by(Exercise.Name) |> 
+  mutate(Times.lifted = n()) |> 
+  arrange(desc(Times.lifted))
+
+lifts
+```
+
+```{r}
+lifts |> 
+  group_by(Completed.Date) |> 
+  mutate(Total.Volume.Load = sum(Volume.Load, na.rm = T)) |> 
+  mutate(Completed.Date = mdy(Completed.Date)) |> 
+  ggplot(aes(x=Completed.Date, y=Total.Volume.Load))+
+  geom_line()
+```
+
+```{r}
+compound_lifts <-lifts |> 
+  filter(Highest.Max > 200) |> 
+  group_by(Completed.Date) |> 
+  mutate(Total.Volume.Load = sum(Volume.Load, na.rm = T)) |> 
+  mutate(Completed.Date = mdy(Completed.Date))
+
+compound_lifts |> 
+  ggplot(aes(x=Completed.Date, y=Total.Volume.Load, colour = Exercise.Name))+
+  geom_line()
+
+
+compound_lifts |> 
+  mutate(Exercise.Name = ifelse(grepl("RDL", Exercise.Name), "RDL", Exercise.Name)) |> 
+  ggplot(aes(x=Completed.Date, y=Total.Volume.Load, colour = Exercise.Name))+
+  geom_line()
+
+
+compound_lifts <- compound_lifts |> 
+ mutate(Lift.Group = case_when(
+    str_detect(Exercise.Name, regex("RDL", ignore_case = TRUE))   ~ "RDL Group*",
+    str_detect(Exercise.Name, regex("Squat", ignore_case = TRUE)) ~ "Squat Group*",
+    str_detect(Exercise.Name, regex("Bench", ignore_case = TRUE)) ~ "Bench Group*",
+    str_detect(Exercise.Name, regex("Clean", ignore_case = TRUE)) ~ "Clean Group*",
+    str_detect(Exercise.Name, regex("Deadlift", ignore_case = TRUE)) ~ "Deadlift Group*",
+    TRUE ~ "Other*" # Default category if no pattern matches
+  ))
+
+compound_lifts |> 
+  group_by(Lift.Group) |> 
+  ggplot(aes(x=Completed.Date, y=Volume.Load, colour = Lift.Group))+
+  geom_line()+ 
+  scale_color_viridis_d()+
+  theme_minimal()+
+  labs(title = "Volume of Compound Lifts Over Time", subtitle = "Large spikes in Load throughout the year, but no real increase in load from start to finish", x = "Date of Completion", y = "Volume (exericise group per day)")
+```
+
+```{r fig.height=12}
+compound_lifts |> 
+  pivot_longer(cols = starts_with("Result."), names_to = "Set", values_to = "Weight", names_prefix = "Result.") |> 
+  filter(Set <= 4, Set !=10) |> 
+  ggplot(aes(x=Weight, y = Set))+
+  geom_boxplot() +
+  facet_wrap(~Lift.Group, ncol = 1, scale = "free_y")+
+  theme_minimal()+
+  theme(strip.text = element_text(hjust = 0, face = "bold", size = 14), plot.title = element_text(hjust = 0, face = "bold", size = 16), plot.caption = element_text(hjust = 0, size = 14), plot.subtitle = element_text(size = 14))+
+  labs(title = "Distabution of the Weight Lifted of Compound Lift Groups, by Sets", subtitle = "There is a genral trend of weight increasing from set to set from Oct 2025 to Oct 2026", x = "Weight Lifted (in pounds)", y = "Number of Sets Lifted in one session", caption = "By: Andrew Lamb, Created:11/2/26, Data: Personal Lifting Data, TeamBuildr 10/24/26
+*Bench Group: BB* Bench Press
+*Clean Group: Hang Clean, Power Clean - Floor, Clean Low Pull - Floor, Clean Low Pull - Power Position, Clean Low Pull - Above Knee
+*Deadlift Group: HB* Deadlift, HB Deadlift - Split Stance
+*Other: 2-DB Bentover Row, BB Alternating Reverse Lunge - Front Rack
+*RDL Group: BB RDL, BB RDL - Staggered Stance
+*Squat Group: HB Split Squat, BB 1/4 Squat from Pin, BB Back Squat - From Pins, BB Front Squat, Front Squat - Pins
+*BB = Barbell, *HB: Hex Bar")
+
+ggsave("pvj_1.png")
+```
+
+```{r fig.height=12}
+# Attempt 2 
+
+compound_lifts |> 
+  pivot_longer(cols = starts_with("Result."), names_to = "Set", values_to = "Weight", names_prefix = "Result.") |> 
+  filter(Set <= 4, Set !=10) |> 
+  ggplot(aes(x=Weight, y = Set, color = Lift.Group))+
+  geom_boxplot() +
+  theme_minimal()+
+  theme(strip.text = element_text(hjust = 0, face = "bold", size = 14), plot.title = element_text(hjust = 0, face = "bold", size = 16), plot.caption = element_text(hjust = 0, size = 14), plot.subtitle = element_text(size = 14))+
+  labs(title = "Distabution of the Weight Lifted of Compound Lift Groups, by Sets", subtitle = "There is a genral trend of weight increasing from set to set from Oct 2025 to Oct 2026", x = "Weight Lifted (in pounds)", y = "Number of Sets Lifted in one session", caption = "By: Andrew Lamb, Created:11/2/26, Data: Personal Lifting Data, TeamBuildr 10/24/26
+*Bench Group: BB* Bench Press
+*Clean Group: Hang Clean, Power Clean - Floor, Clean Low Pull - Floor, Clean Low Pull - Power Position, Clean Low Pull - Above Knee
+*Deadlift Group: HB* Deadlift, HB Deadlift - Split Stance
+*Other: 2-DB Bentover Row, BB Alternating Reverse Lunge - Front Rack
+*RDL Group: BB RDL, BB RDL - Staggered Stance
+*Squat Group: HB Split Squat, BB 1/4 Squat from Pin, BB Back Squat - From Pins, BB Front Squat, Front Squat - Pins
+*BB = Barbell, *HB: Hex Bar")
+
+ggsave("pvj_2.png")
+```
+
+

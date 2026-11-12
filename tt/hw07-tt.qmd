@@ -1,0 +1,127 @@
+---
+title: "Homework 07"
+---
+
+
+## TidyTuesday Part (Optional)
+
+::: {.callout-important title="Instructions"}
+You can count work on this week's TidyTuesday toward the exceptional work.
+:::
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story mainly composed of [effective visualizations](https://docs.google.com/presentation/d/1Q-C0sFxYGQvkxb6PU6OM_YOv6Nilalpk-IWb362PoRc/preview?slide=id.g13360dab5d5_0_61#slide=id.g13360dab5d5_0_61).  Provide sufficient background for readers to grasp your narrative.  Refer to the Homework Instructions ⭐ page on the course website for details on how to submit this part.
+
+## Getting the Data
+
+```{r}
+library(tidyverse)
+
+grambank_languages <- read_csv("data/raw/grambank_languages.csv")
+```
+## Exploring the data
+```{r}
+head(grambank_languages)
+```
+
+
+
+```{r}
+grambank_languages |> 
+  count(family_name) |> 
+  arrange(desc(n))
+
+```
+
+## Initial Look at the Data
+
+> Spatially do families of languages stay in the same macro area?
+
+```{r}
+library(leaflet)
+
+grambank_languages <- grambank_languages |> 
+  filter(!is.na(macroarea))
+
+grambank_languages
+
+pal <- colorFactor(palette = "YlOrRd", domain = grambank_languages$macroarea)
+
+
+leaflet(data = grambank_languages) |> 
+  addProviderTiles("Esri.WorldStreetMap") %>%
+  addCircles(label = grambank_languages$family_name, 
+             color = ~pal(grambank_languages$macroarea)) |> 
+  addLegend("bottomright", pal = pal, values = ~grambank_languages$macroarea, title = "Macro Area") |> 
+  addControl("<h4>Are languages more consitiant with there macro area</h4>", position = "topleft") |> 
+  addControl("<h10>Lanuages stay in there macro area</h10>", position = "topleft") |> 
+  addControl("<p>By: Andrew Lamb, Created:11/9/26, Data:Grambank, TidyTuesday 11/3/26</p>", position = "bottomleft")
+
+
+
+
+```
+
+> The language families do spatial stay in the same region as others in the same family. 
+
+## Digging deeper
+
+> What are the most popular origns of current languages?
+
+```{r}
+grambank_languages |> 
+  mutate(lang_og = sub("(/.*)", "", lineage)) |> 
+  filter(!is.na(lang_og)) |> 
+  group_by(lang_og) |> 
+  summarise(popularity = n())
+```
+
+> Now that we have the popularity, where are the languages that stem from the ten most popular language origns?
+
+```{r}
+pop_lang <- grambank_languages |> 
+  mutate(lang_og = sub("(/.*)", "", lineage)) |> 
+  filter(!is.na(lang_og)) |> 
+  group_by(lang_og) |> 
+  summarise(popularity = n()) |> 
+  arrange(desc(popularity)) |> 
+  head(10)
+
+langs_w_most_common_roots <- grambank_languages |> 
+  mutate(lang_og = sub("(/.*)", "", lineage)) |> 
+  filter(!is.na(lang_og)) |> 
+  semi_join(pop_lang)
+
+langs_w_most_common_roots
+
+langs_w_most_common_roots |> 
+  ggplot(aes(y=fct_infreq(lang_og), fill = macroarea))+
+  geom_bar(position = "fill")+
+  scale_fill_viridis_d()
+  
+
+
+```
+> This is interesting, when only focusing on the current languages that stem from the 10 most popular language roots the trend shown in the first map doesn't hold true. 
+
+
+> What would it look like when only these filtered languages? Where are they concentrated, what are there macro areas?
+
+```{r}
+leaflet(data = langs_w_most_common_roots) |> 
+  addProviderTiles("Esri.WorldStreetMap") %>%
+  addCircles(label = grambank_languages$language_name, 
+             color = ~pal(grambank_languages$macroarea)) |> 
+  addLegend("bottomright", pal = pal, values = ~grambank_languages$macroarea, title = "Macro Area") |> 
+  addControl("<h4>Where are the languages that stem from the top ten langauge roots</h4>", position = "topleft") |> 
+  addControl("<h10>There is a higher concentration in Subsahairn Africa and Southern Asia</h10>", position = "topleft") |> 
+  addControl("<p>By: Andrew Lamb, Created:11/9/26, Data:Grambank, TidyTuesday 11/3/26</p>", position = "bottomleft")
+```
+
+
+
+> There is a heavy concentraition of languages that stem from the ten most popular language roots in Subsahairn Africa, Southern Asia and Australia, this would make some sense because these are places where early civilazations grew from. 
+
+# Conclusion 
+
+> Languages that come from the ten most popular langauge origns sit on what looks to be a line that runs through Subsahairn Africa, South East Asia, into Australia. There deosn't seem to be a lot of languags that stem from these top ten in the Americas , Northern Asia and Russia.
+
