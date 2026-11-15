@@ -119,6 +119,52 @@ leaflet(data = langs_w_most_common_roots) |>
 
 
 
+```{r}
+library(ggplot2)
+library(maps)
+
+# 1. Load world map outline data to replace the leaflet base tiles
+world_map <- map_data("world")
+
+# 2. Build the ggplot
+ggplot() +
+  # Draw the world map background
+  geom_polygon(
+    data = world_map, 
+    aes(x = long, y = lat, group = group),
+    fill = "gray92", 
+    color = "white", 
+    linewidth = 0.2
+  ) +
+  # Plot the language points (replaces addCircles)
+  # Note: Check your dataset's exact column names for longitude, latitude, and macroarea
+  geom_point(
+    data = langs_w_most_common_roots,
+    aes(x = longitude, y = latitude, color = lang_og),
+    alpha = 0.3,
+    size = 2
+  ) +
+  # Ensure the map proportions aren't stretched
+  coord_quickmap() +
+  # Add titles, subtitle, caption, and legend title (replaces addControl & addLegend)
+  labs(
+    title = "Where are the languages that stem from the top ten language roots",
+    subtitle = "There is a higher concentration in Sub-Saharan Africa and Southern Asia",
+    caption = "By: Andrew Lamb, Created: 11/9/26, Data: Grambank, TidyTuesday 11/3/26",
+    color = "Top 10 common language roots"
+  ) +
+  # Clean up gridlines and axis labels for a map look
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(size = 10, color = "gray30"),
+    plot.caption = element_text(size = 8, color = "gray50", hjust = 0),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+
 > There is a heavy concentraition of languages that stem from the ten most popular language roots in Subsahairn Africa, Southern Asia and Australia, this would make some sense because these are places where early civilazations grew from. 
 
 # Conclusion 
